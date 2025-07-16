@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "normalize.css";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-p: #64379f;
+  --color-p_gradient: linear-gradient(to right, #64379f, #e1e1e1);
+  }
+
+html {
+  box-sizing: border-box;
+  background-color: black;
+}
+*,*:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  line-height: 1.5;
+  
+  background-color: white;
+}
+a {
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark){
+  body {
+    background-image: linear-gradient(0deg, #000000, #1d1818, #0f0d18);
+  }
+}
