@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "normalize.css";
 
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
@@ -22,6 +21,25 @@ body {
 }
 a {
   text-decoration: none;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+/* For Firefox */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
 }
 
 @media (prefers-color-scheme: dark){

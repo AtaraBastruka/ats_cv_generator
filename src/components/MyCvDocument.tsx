@@ -1,13 +1,10 @@
 "use client";
 import React from 'react';
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-} from '@react-pdf/renderer';
 import { type ResumeData, type CvTitles } from '@/types';
+
+import * as ReactPDF from '@react-pdf/renderer';
+
+const { Document, Page, Text, View, StyleSheet, Link } = ReactPDF;
 
 // -----------------------------------------------------------------------------
 // Estilos del PDF
@@ -38,6 +35,8 @@ const styles = StyleSheet.create({
   },
   contactItem: {
     marginHorizontal: 8,
+    textDecoration: 'none',
+    color: '#000000',
   },
   section: {
     marginBottom: 12,
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
   jobHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 2,
   },
   jobTitle: {
@@ -90,6 +90,9 @@ const styles = StyleSheet.create({
   },
   dates: {
     textTransform: 'capitalize',
+    fontSize: 9,
+    marginTop: 3,
+    marginRight: 2
   },
   educationDetails: {
     fontSize: 10,
@@ -151,180 +154,222 @@ const styles = StyleSheet.create({
 // -----------------------------------------------------------------------------
 interface ATSResumeProps {
   data: ResumeData;
-  titles: CvTitles;
+  locale: string;
 }
 
+// -----------------------------------------------------------------------------
+// Títulos por idioma
+// -----------------------------------------------------------------------------
+const es_titles: CvTitles = {
+  sumary: 'Resumen',
+  experience: 'Experiencia',
+  education: 'Educación',
+  gpa: 'Nota final',
+  skills: 'Habilidades',
+  stechnical: 'Técnico',
+  slanguages: 'Lenguajes',
+  projects: 'Proyectos',
+  ptechnologies: 'Tecnologías',
+  references: 'Referencias',
+  certificates: 'Certificaciones',
+};
+const en_titles: CvTitles = {
+  sumary: 'Summary',
+  experience: 'Experience',
+  education: 'Education',
+  gpa: 'GPA',
+  skills: 'Skills',
+  stechnical: 'Technical',
+  slanguages: 'Languages',
+  projects: 'Projects',
+  ptechnologies: 'Technologies',
+  references: 'References',
+  certificates: 'Certificates',
+};
 
-const ATSResume: React.FC<ATSResumeProps> = ({ data, titles}) => (
-  <Document>
-    <Page size="LETTER" style={styles.page}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.name}>{data.personalInfo.name}</Text>
-        <View style={styles.contactInfo}>
-          <Text style={styles.contactItem}>{data.personalInfo.email}</Text>
-          <Text style={styles.contactItem}>•</Text>
-          <Text style={styles.contactItem}>{data.personalInfo.phone}</Text>
-          <Text style={styles.contactItem}>•</Text>
-          <Text style={styles.contactItem}>{data.personalInfo.location}</Text>
-          {data.personalInfo.linkedin && (
-            <>
-              <Text style={styles.contactItem}>•</Text>
-              <Text style={styles.contactItem}>
-                {data.personalInfo.linkedin}
-              </Text>
-            </>
-          )}
-          {data.personalInfo.website && (
-            <>
-              <Text style={styles.contactItem}>•</Text>
-              <Text style={styles.contactItem}>{data.personalInfo.website}</Text>
-            </>
-          )}
+
+const ATSResume: React.FC<ATSResumeProps> = ({ data, locale}) => {
+  const titles = locale === 'es' ? es_titles : en_titles;
+  // Helper function to ensure URL has https://
+  const ensureHttps = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    // Prepend https:// if no scheme is found
+    return `https://${url}`;
+  };
+  return(
+    <Document>
+      <Page size="LETTER" style={styles.page}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.name}>{data.personalInfo.name}</Text>
+          <View style={styles.contactInfo}>
+            <Text style={styles.contactItem}>{data.personalInfo.email}</Text>
+            <Text style={styles.contactItem}>•</Text>
+            <Text style={styles.contactItem}>{data.personalInfo.phone}</Text>
+            <Text style={styles.contactItem}>•</Text>
+            <Text style={styles.contactItem}>{data.personalInfo.location}</Text>
+            {data.personalInfo.linkedin && (
+              <>
+                <Text style={styles.contactItem}>•</Text>
+                <Text style={styles.contactItem}>
+                  {data.personalInfo.linkedin}
+                </Text>
+              </>
+            )}
+            {data.personalInfo.website && (
+              <>
+                <Text style={styles.contactItem}>•</Text>
+                <Link src={ensureHttps(data.personalInfo.website)} style={styles.contactItem}>{data.personalInfo.website}</Link>
+              </>
+            )}
+          </View>
         </View>
-      </View>
 
-      {/* Summary */}
-      {data.summary && (
+        {/* Summary */}
+        {data.summary && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{titles.sumary}</Text>
+            <Text>{data.summary}</Text>
+          </View>
+        )}
+
+        {/* Experience */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{titles.sumary}</Text>
-          <Text>{data.summary}</Text>
+          <Text style={styles.sectionTitle}>{titles.experience}</Text>
+          {data.experience.map((job, index) => (
+            <View key={index} style={styles.experienceItem}>
+              <View style={styles.jobHeader}>
+                <Text style={styles.jobTitle}>{job.title}</Text>
+                <Text style={styles.dates}>
+                  {job.startDate} - {job.endDate}
+                </Text>
+              </View>
+              <Text style={styles.companyInfo}>
+                {job.company}, {job.location}
+              </Text>
+              {job.bullets.map((bullet, bulletIndex) => (
+                <View key={bulletIndex} style={styles.bulletPoint}>
+                  <Text style={styles.bullet}>•</Text>
+                  <Text style={styles.bulletText}>{bullet}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
         </View>
-      )}
 
-      {/* Experience */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{titles.experience}</Text>
-        {data.experience.map((job, index) => (
-          <View key={index} style={styles.experienceItem}>
-            <View style={styles.jobHeader}>
-              <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.dates}>
-                {job.startDate} - {job.endDate}
+        {/* Education */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{titles.education}</Text>
+          {data.education.map((edu, index) => (
+            <View key={index} style={styles.educationItem}>
+              <View style={styles.educationHeader}>
+                <Text style={styles.textbold} >{edu.degree}</Text>
+                <Text style={styles.dates}>{edu.graduationDate}</Text>
+              </View>
+              <Text style={styles.educationDetails}>
+                {edu.school}, {edu.location}
+                {edu.gpa && ` • GPA: ${edu.gpa}`}
+                {edu.honors && ` • ${edu.honors}`}
               </Text>
             </View>
-            <Text style={styles.companyInfo}>
-              {job.company}, {job.location}
-            </Text>
-            {job.bullets.map((bullet, bulletIndex) => (
-              <View key={bulletIndex} style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>{bullet}</Text>
+          ))}
+        </View>
+
+        {/* Skills */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{titles.skills}</Text>
+          <View style={styles.skillsContainer}>
+            {data.skills.technical && data.skills.technical.length > 0 && (
+              <View style={styles.skillCategory}>
+                <Text style={styles.skillLabel}>{titles.stechnical}:</Text>
+                <Text style={styles.skillList}>
+                  {data.skills.technical.join(', ')}
+                </Text>
+              </View>
+            )}
+            {data.skills.languages && data.skills.languages.length > 0 && (
+              <View style={styles.skillCategory}>
+                <Text style={styles.skillLabel}>{titles.slanguages}:</Text>
+                <Text style={styles.skillList}>
+                  {data.skills.languages.join(', ')}
+                </Text>
+              </View>
+            )}
+          </View>
+        </View>
+        
+        {/* Certificates */}
+        {data.certifications && data.certifications.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{titles.certificates}</Text>
+            {data.certifications.map((certification, index) => (
+              <View key={index} style={styles.bulletPoint}>
+                  <Text style={styles.bullet}>•</Text>
+                  <Text style={styles.bulletText}>{certification.name} - {certification.institution} ({certification.date})</Text>
               </View>
             ))}
           </View>
-        ))}
-      </View>
+        )}
 
-      {/* Education */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{titles.education}</Text>
-        {data.education.map((edu, index) => (
-          <View key={index} style={styles.educationItem}>
-            <View style={styles.educationHeader}>
-              <Text style={styles.textbold} >{edu.degree}</Text>
-              <Text>{edu.graduationDate}</Text>
-            </View>
-            <Text style={styles.educationDetails}>
-              {edu.school}, {edu.location}
-              {edu.gpa && ` • GPA: ${edu.gpa}`}
-              {edu.honors && ` • ${edu.honors}`}
-            </Text>
-          </View>
-        ))}
-      </View>
-
-      {/* Skills */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{titles.skills}</Text>
-        <View style={styles.skillsContainer}>
-          {data.skills.technical && data.skills.technical.length > 0 && (
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillLabel}>{titles.stechnical}:</Text>
-              <Text style={styles.skillList}>
-                {data.skills.technical.join(', ')}
-              </Text>
-            </View>
-          )}
-          {data.skills.languages && data.skills.languages.length > 0 && (
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillLabel}>{titles.slanguages}:</Text>
-              <Text style={styles.skillList}>
-                {data.skills.languages.join(', ')}
-              </Text>
-            </View>
-          )}
-        </View>
-      </View>
-      
-      {/* Certificates */}
-      {data.certifications && data.certifications.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{titles.certificates}</Text>
-          {data.certifications.map((certification, index) => (
-            <View key={index} style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>{certification.name} - {certification.institution} ({certification.date})</Text>
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* Projects */}
-      {data.projects && data.projects.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{titles.projects}</Text>
-          {data.projects.map((project, index) => (
-            <View key={index} style={styles.projectItem}>
-              <Text style={styles.projectHeader}>{project.name}</Text>
-              <Text style={styles.projectDescription}>
-                {project.description}
-              </Text>
-              <Text style={styles.projectTech}>
-                {titles.ptechnologies}: {project.technologies.join(', ')}
-              </Text>
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* References */}
-      {data.references && data.references.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{titles.references}</Text>
-          {data.references.map((ref, index) => (
-            <View key={index} style={styles.referenceItem}>
-              <Text style={styles.referenceName}>{ref.name}</Text>
-              <Text style={styles.referencePosition}>{ref.position}</Text>
-              <View style={styles.referenceContactInfo}>
-                {ref.email && (
-                  <Text style={styles.contactItem}>{ref.email}</Text>
-                )}
-                {ref.email && (ref.phone || ref.linkedin || ref.website) && (
-                  <Text style={styles.contactItem}>•</Text>
-                )}
-                {ref.phone && (
-                  <Text style={styles.contactItem}>{ref.phone}</Text>
-                )}
-                {ref.phone && (ref.linkedin || ref.website) && (
-                  <Text style={styles.contactItem}>•</Text>
-                )}
-                {ref.linkedin && (
-                  <Text style={styles.contactItem}>{ref.linkedin}</Text>
-                )}
-                {ref.linkedin && ref.website && (
-                  <Text style={styles.contactItem}>•</Text>
-                )}
-                {ref.website && (
-                  <Text style={styles.contactItem}>{ref.website}</Text>
-                )}
+        {/* Projects */}
+        {data.projects && data.projects.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{titles.projects}</Text>
+            {data.projects.map((project, index) => (
+              <View key={index} style={styles.projectItem}>
+                <Text style={styles.projectHeader}>{project.name}</Text>
+                <Text style={styles.projectDescription}>
+                  {project.description}
+                </Text>
+                <Text style={styles.projectTech}>
+                  {titles.ptechnologies}: {project.technologies.join(', ')}
+                </Text>
               </View>
-            </View>
-          ))}
-        </View>
-      )}
-    </Page>
-  </Document>
-);
+            ))}
+          </View>
+        )}
+
+        {/* References */}
+        {data.references && data.references.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{titles.references}</Text>
+            {data.references.map((ref, index) => (
+              <View key={index} style={styles.referenceItem}>
+                <Text style={styles.referenceName}>{ref.name}</Text>
+                <Text style={styles.referencePosition}>{ref.position}</Text>
+                <View style={styles.referenceContactInfo}>
+                  {ref.email && (
+                    <Text style={styles.contactItem}>{ref.email}</Text>
+                  )}
+                  {ref.email && (ref.phone ?? ref.linkedin ?? ref.website) && (
+                    <Text style={styles.contactItem}>•</Text>
+                  )}
+                  {ref.phone && (
+                    <Text style={styles.contactItem}>{ref.phone}</Text>
+                  )}
+                  {ref.phone && (ref.linkedin ?? ref.website) && (
+                    <Text style={styles.contactItem}>•</Text>
+                  )}
+                  {ref.linkedin && (
+                    <Text style={styles.contactItem}>{ref.linkedin}</Text>
+                  )}
+                  {ref.linkedin && ref.website && (
+                    <Text style={styles.contactItem}>•</Text>
+                  )}
+                  {ref.website && (
+                    <Text style={styles.contactItem}>{ref.website}</Text>
+                  )}
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+      </Page>
+    </Document>
+  )
+};
 
 export default ATSResume;

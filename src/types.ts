@@ -63,35 +63,3 @@ export interface CvTitles {
   references: string;
   certificates: string;
 }
-
-// -----------------------------------------------------------------------------
-// Títulos por idioma
-// -----------------------------------------------------------------------------
-const es_titles: CvTitles = {
-  sumary: 'Resumen',
-  experience: 'Experiencia',
-  education: 'Educación',
-  gpa: 'Nota final',
-  skills: 'Habilidades',
-  stechnical: 'Técnico',
-  slanguages: 'Lenguajes',
-  projects: 'Proyectos',
-  ptechnologies: 'Tecnologías',
-  references: 'Referencias',
-  certificates: 'Certificaciones',
-};
-const en_titles: CvTitles = {
-  sumary: 'Summary',
-  experience: 'Experience',
-  education: 'Education',
-  gpa: 'GPA',
-  skills: 'Skills',
-  stechnical: 'Technical',
-  slanguages: 'Languages',
-  projects: 'Projects',
-  ptechnologies: 'Technologies',
-  references: 'References',
-  certificates: 'Certificates',
-};
-
-export { es_titles, en_titles };

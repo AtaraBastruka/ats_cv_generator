@@ -1,0 +1,62 @@
+{
+  "Layout": {
+    "pageTitle": "CV Forge – Generador de CVs Rápido, Privado y Gratuito",
+    "pageDescription": "Genera tu CV en segundos.",
+    "homelink": "Inicio",
+    "githubTitle": "Icono de GitHub",
+    "logoTitle": "Logo de CV Forge",
+    "copyright": "Creado por",
+    "privacylabel": "Política de Privacidad",
+    "privacy": "Privacidad",
+    "termslabel": "Términos de Servicio",
+    "terms": "Términos de Uso"
+  },
+  "HomePage": {
+    "heroMessage": "Crea tu Hoja de Vida, a tu Manera.",
+    "heroDescription1": "Rápido, Privado y",
+    "heroDescription2": "En Tu Navegador.",
+    "startButton": "Empieza a Crear",
+    "learnButton": "Aprende Más",
+    "trustNoReg": "No Requiere Registro",
+    "trustPrivate": "100% Privado y Seguro",
+    "trustOpenSource": "De Código Abierto",
+    "whatMakesus": "¿Qué Hace CV Forge Diferente?",
+    "featurePrivacy": "Privacidad Primero",
+    "featurePrivacyDescription": "Tu información personal nunca deja tu dispositivo. Todo el procesamiento se realiza localmente en tu navegador, asegurando una mayor privacidad y seguridad.",
+    "featureLightning": "Muy Rápido",
+    "featureLightningDescription": "Genera CVs profesionales en segundos. Sin esperas por procesamiento de servidores o cargas lentas a la nube. Sólo velocidad y eficiencia.",
+    "featureATS": "Optimizado para ATS",
+    "featureATSDescription": "Diseñado para funcionar bien con sistemas de reclutamiento modernos, usando diseños y formatos limpios y estandarizados.",
+    "howItWorks": "Funcionamiento",
+    "enterInfo": "Ingresa tu Información",
+    "enterInfoDescription": "Llena los detalles de tu hoja de vida en un formato claro y estructurado.",
+    "previewResume": "Previsualiza tu CV",
+    "previewResumeDescription": "Visualiza inmediatamente cómo tu CV con un diseño profesional.",
+    "downloadResume": "Descarga tu CV",
+    "downloadResumeDescription": "Exporta un PDF de alta calidad y amigable con ATS - Nada de registros, ni rastreo de tus datos.",
+    "ctaMessage": "¿Listo(a) para Creat tu CV?",
+    "ctaDescription": "Rápido, privado y gratuito - en tu navegador.",
+    "ctaButton": "Empieza a Crear tu CV"
+  },
+  "PrivacyPage": {
+    "pageTitle": "Política de Privacidad - CV Forge",
+    "pageDescription": "CV Forge no alamacena información en nuestros servidores. Tus datos se quedan en tu navegador, completamente privados.",
+    "privacyFirst": "CVForge es un generador de CVs que tiene por prioridad la privacidad. Toda tu información se queda completamente en tu dispositivo - nada es enviado a nuestros servidores.",
+    "privacyList1": "No recopilamos, rastreamos o almacenamos ninguna información personal.",
+    "privacyList2": "Todo lo que escribes se procesa localmente en tu navegador.",
+    "privacyList3": "No usamos cookies, análisis de datos o ningún otro servicio de rastreo de terceros.",
+    "privacyList4": "Por transparencia, este sitio web es de código abierto y puede ser auditado por cualquiera.",
+    "privacyContact": "Si tienes alguna pregunta o inquietud, no dudes en ponerte en contacto a través del repositorio de GitHub.",
+    "privacyLastUpdated": "Última actualización: 07/17/2025"
+  },
+  "TermsPage": {
+    "pageTitle": "Términos de Uso - CV Forge",
+    "pageDescription": "CV Forge es un generador de CVs local. No recopilamos o almacenamos tus datos, todo se queda en tu dispositivo.",
+    "termsDescription": "CV Forge es proporcionado como es, sin garantías. Puedes usarlo libremente para generar CVs para uso personal o profesional.",
+    "termsList1": "Mantienes la propiedad completa de la información que ingresas y los documentos que generas.",
+    "termsList2": "No somos responsables de cómo tus CVs se utilicen, compartan o interpreten por parte de terceros (como empleadores).",
+    "termsList3": "Al usar CV Forge, aceptas utilizarlo de manera respetuosa y legal.",
+    "termsFinal": "Esta herramienta es gratuita, de código abierto y creada en buena fe para ayudar a usuarios a crear CVs más efectivos sin comprometer la privacidad.",
+    "termsLastUpdated": "Última actualización: 07/17/2025"
+  }
+}

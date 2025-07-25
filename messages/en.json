@@ -1,0 +1,78 @@
+{
+  "Layout": {
+    "pageTitle": "CV Forge – Fast, Private Resume Builder",
+    "pageDescription": "Generate your CV in seconds.",
+    "homelink": "Home",
+    "githubTitle": "GitHub Icon",
+    "logoTitle": "CV Forge Logo",
+    "copyright": "Created by",
+    "privacylabel": "Privacy Policy",
+    "privacy": "Privacy",
+    "termslabel": "Terms of Service",
+    "terms": "Terms"
+  },
+  "HomePage": {
+    "heroMessage": "Create Your Resume, Your Way.",
+    "heroDescription1": "Fast, Private and",
+    "heroDescription2": "Right in Your Browser.",
+    "startButton": "Start Creating",
+    "learnButton": "Learn More",
+    "trustNoReg": "No Registration Required",
+    "trustPrivate": "100% Private & Secure",
+    "trustOpenSource": "Open Source",
+    "whatMakesus": "What Makes CVForge Different?",
+    "featurePrivacy": "Privacy First",
+    "featurePrivacyDescription": "Your personal information never leaves your device. All processing happens locally in your browser, ensuring maximum privacy and security.",
+    "featureLightning": "Lightning Fast",
+    "featureLightningDescription": "Generate professional CVs in seconds. No waiting for server processing or slow uploads. Just pure speed and efficiency.",
+    "featureATS": "ATS Optimized",
+    "featureATSDescription": "Designed to work well with modern recruiting systems, using clean layouts and standard formatting.",
+    "howItWorks": "How It Works",
+    "enterInfo": "Enter Your Info",
+    "enterInfoDescription": "Fill out your resume details in a clean and structured format.",
+    "previewResume": "Preview Your Resume",
+    "previewResumeDescription": "Instantly see how your resume looks in a professional layout.",
+    "downloadResume": "Download Your Resume",
+    "downloadResumeDescription": "Export a high-quality, ATS-friendly PDF - No sign-up, no data tracking.",
+    "ctaMessage": "Ready to Create Your CV?",
+    "ctaDescription": "Fast, private and free - all in your browser.",
+    "ctaButton": "Start Creating Your CV"
+  },
+  "PrivacyPage": {
+    "pageTitle": "Privacy Policy - CV Forge",
+    "pageDescription": "CV Forge stores nothing on our servers. Your data stays in your browser, completely private.",
+    "privacyFirst": "CVForge is a privacy-first resume builder. All of your data stays entirely on your device - nothing is ever sent to our servers.",
+    "privacyList1": "We do not collect, track, or store any personal information.",
+    "privacyList2": "Everything you type is processed locally in your browser.",
+    "privacyList3": "We do not use cookies, analytics, or any third-party scripts that track you.",
+    "privacyList4": "This site is open source and can be audited by anyone for transparency.",
+    "privacyContact": "If you have any questions or concerns, feel free to reach out via the GitHub repository.",
+    "privacyLastUpdated": "Last updated: 07/17/2025"
+  },
+  "TermsPage": {
+    "pageTitle": "Terms of Use - CV Forge",
+    "pageDescription": "CVForge is a local-first resume builder. We do not collect or store your data—everything stays on your device.",
+    "termsDescription": "CVForge is provided as-is, without warranties or guarantees. You may use it freely to generate resumes for personal or professional use.",
+    "termsList1": "You retain full ownership of the information you input and the documents you generate.",
+    "termsList2": "We are not responsible for how your resumes are used, shared, or interpreted by third parties (like employers).",
+    "termsList3": "By using CVForge, you agree to use it respectfully and lawfully.",
+    "termsFinal": "This tool is free, open-source, and created in good faith to help users build better resumes without compromising privacy.",
+    "termsLastUpdated": "Last updated: 07/17/2025"
+  },
+  "cvGenerator": {
+    "pageTitle": "Create Your CV",
+    "pageDescription": "Start to generate your professional CV.",
+    "CVsumary": "Sumary",
+    "CVexperience": "Experience",
+    "CVeducation": "Education",
+    "CVgpa": "GPA",
+    "CVskills": "Skills",
+    "CVstechnical": "Technical",
+    "CVslanguages": "Languages",
+    "CVprojects": "Projects",
+    "CVptechnologies": "Technologies",
+    "CVreferences": "References",
+    "CVcertificates": "Certificates"
+
+  }
+}
